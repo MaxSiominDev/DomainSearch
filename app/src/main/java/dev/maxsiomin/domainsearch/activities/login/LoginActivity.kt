@@ -1,0 +1,97 @@
+package dev.maxsiomin.domainsearch.activities.login
+
+import android.app.Dialog
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import dev.maxsiomin.domainsearch.R
+import dev.maxsiomin.domainsearch.activities.main.MainActivity
+import dev.maxsiomin.domainsearch.base.DialogBuilder
+import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
+import dev.maxsiomin.domainsearch.util.SharedData
+import dev.maxsiomin.domainsearch.util.SharedDataImpl
+import javax.inject.Inject
+
+/**
+ * The only activity in application that doesn't extend BaseActivity
+ * Contains 3 Fragments: LoginFragment, SignupFragment, ResetPasswordFragment
+ */
+@AndroidEntryPoint
+class LoginActivity : AppCompatActivity() {
+
+    lateinit var sharedData: SharedData
+
+    @Inject
+    lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+        sharedData = SharedDataImpl(savedInstanceState?.getBundle(""))
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.login_activity_fragment_container, LoginFragment.newInstance())
+                .commit()
+        }
+    }
+
+    /**
+     * Called from LoginFragment or from [VerifyEmailDialog] when user just logged in
+     */
+    fun onLogin() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    /**
+     * Called from SignupFragment when user just signed up
+     */
+    fun onSignup() {
+        val dialog = VerifyEmailDialog.newInstance()
+        dialog.show(supportFragmentManager)
+    }
+
+    /**
+     * Suggest user to verify email. It's not mandatory
+     */
+    class VerifyEmailDialog : DialogFragment() {
+
+        private val loginActivity get() = requireActivity() as LoginActivity
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+            val dialog = DialogBuilder(requireContext())
+                .setMessage(R.string.want_verify_email)
+                .setNegativeButton(R.string.no_thanks) { _, _ ->
+                    loginActivity.onLogin()
+                }
+                .setPositiveButton(R.string.verify) { _, _ ->
+                    loginActivity.auth.currentUser!!.sendEmailVerification()
+                    loginActivity.onLogin()
+                }
+                .create()
+
+            dialog.setCanceledOnTouchOutside(false)
+
+            return dialog
+        }
+
+        fun show(manager: FragmentManager) {
+            show(manager, TAG)
+        }
+
+        companion object {
+
+            const val TAG = "VerifyEmailDialog"
+
+            @JvmStatic
+            fun newInstance() = VerifyEmailDialog()
+        }
+    }
+}

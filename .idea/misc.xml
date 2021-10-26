@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout-land/fragment_login.xml" value="0.44947916666666665" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout-land/fragment_signup.xml" value="0.44947916666666665" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout-sw600dp/fragment_search.xml" value="0.275" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/activity_main.xml" value="0.3378623188405797" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/fragment_history.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/fragment_reset_password.xml" value="0.35144927536231885" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/layout/fragment_signup.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21458333333333332" />
+        <entry key="..\:/AndroidStudioProjects/DomainSearch/app/src/main/res/xml/root_preferences.xml" value="0.3432971014492754" />
+        <entry key="..\:/AndroidStudioProjects/Domainsearch/app/src/main/res/layout-land/fragment_search.xml" value="0.31040564373897706" />
+        <entry key="..\:/AndroidStudioProjects/Domainsearch/app/src/main/res/layout-sw600dp/fragment_search.xml" value="0.2718579234972678" />
+        <entry key="..\:/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/activity_main.xml" value="0.35054347826086957" />
+        <entry key="..\:/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/fragment_history.xml" value="0.35054347826086957" />
+        <entry key="..\:/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/fragment_search.xml" value="0.3605072463768116" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2890625" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2890625" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2890625" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/font/roboto_bold.xml" value="0.303125" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/layout-land/fragment_search.xml" value="0.27708333333333335" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/layout-sw600dp/fragment_search.xml" value="0.33" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/layout/fragment_history.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/layout/fragment_search.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/Dacha/Desktop/Domainsearch/app/src/main/res/xml/root_preferences.xml" value="0.33" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/font/roboto_bold.xml" value="0.396875" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout-land/fragment_search.xml" value="0.43020833333333336" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout-sw600dp/fragment_search.xml" value="0.275" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/fragment_history.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/fragment_history_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/layout/fragment_settigns.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maxim/AndroidStudioProjects/Domainsearch/app/src/main/res/xml/root_preferences.xml" value="0.36666666666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
