@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.activities.main.MainActivity
 import dev.maxsiomin.domainsearch.base.DialogBuilder
+import dev.maxsiomin.domainsearch.fragments.contract.Navigator
 import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
 import dev.maxsiomin.domainsearch.util.SharedData
 import dev.maxsiomin.domainsearch.util.SharedDataImpl
@@ -21,7 +23,7 @@ import javax.inject.Inject
  * Contains 3 Fragments: LoginFragment, SignupFragment, ResetPasswordFragment
  */
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), Navigator {
 
     lateinit var sharedData: SharedData
 
@@ -47,6 +49,21 @@ class LoginActivity : AppCompatActivity() {
     fun onLogin() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+    }
+
+    override fun launchFragment(container: Int, fragment: Fragment, addToBackStack: Boolean) {
+        with (supportFragmentManager.beginTransaction()) {
+            replace(container, fragment)
+
+            if (addToBackStack)
+                addToBackStack(null)
+
+            commit()
+        }
+    }
+
+    override fun goBack() {
+        supportFragmentManager.popBackStack()
     }
 
     /**

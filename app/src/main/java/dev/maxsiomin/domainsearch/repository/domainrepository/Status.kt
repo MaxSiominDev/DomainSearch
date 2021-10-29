@@ -1,9 +1,9 @@
-package dev.maxsiomin.domainsearch.repository.domainrepository;
+package dev.maxsiomin.domainsearch.repository.domainrepository
 
 /**
  * Status for search history
  */
-public enum Status {
+enum class Status {
 
     /**
      * Retrofit error

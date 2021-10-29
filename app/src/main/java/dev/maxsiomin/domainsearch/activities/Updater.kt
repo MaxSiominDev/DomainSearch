@@ -1,12 +1,12 @@
-package dev.maxsiomin.domainsearch.activities;
+package dev.maxsiomin.domainsearch.activities
 
 /**
  * Activity may implement this interface in order to update application
  */
-public interface Updater {
+interface Updater {
 
     /**
      * Called when user submits they'd like to update
      */
-    void update();
+    fun update()
 }

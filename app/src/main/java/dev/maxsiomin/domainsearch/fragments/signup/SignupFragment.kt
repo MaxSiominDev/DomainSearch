@@ -13,6 +13,7 @@ import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.activities.login.LoginActivity
 import dev.maxsiomin.domainsearch.base.BaseFragment
 import dev.maxsiomin.domainsearch.databinding.FragmentSignupBinding
+import dev.maxsiomin.domainsearch.fragments.contract.navigator
 import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
 import dev.maxsiomin.domainsearch.util.*
 import dev.maxsiomin.domainsearch.util.SharedDataKeys.EMAIL
@@ -27,7 +28,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup, false) {
 
     override val mViewModel by viewModels<SignupViewModel>()
 
-    val loginActivity get() = requireActivity() as LoginActivity
+    private val loginActivity get() = requireActivity() as LoginActivity
 
     @Inject
     lateinit var auth: FirebaseAuth
@@ -44,9 +45,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup, false) {
             passwordEditText.text = sharedData.getSharedString(PASSWORD).notNull().toEditable()
 
             loginTextView.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.login_activity_fragment_container, LoginFragment.newInstance())
-                    .commit()
+                navigator.launchFragment(R.id.login_activity_fragment_container, LoginFragment.newInstance())
             }
 
             signupButton.setOnClickListener {

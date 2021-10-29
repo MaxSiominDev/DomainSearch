@@ -70,8 +70,6 @@ fun TextInputLayout.clearError() {
 fun Context.getDefaultSharedPrefs(): SharedPrefs =
     PreferenceManager.getDefaultSharedPreferences(this)
 
-val Fragment.activityFragmentManager get() = requireActivity().supportFragmentManager
-
 /**
  * Returns true if string contains at least 1 symbol from charRange
  */

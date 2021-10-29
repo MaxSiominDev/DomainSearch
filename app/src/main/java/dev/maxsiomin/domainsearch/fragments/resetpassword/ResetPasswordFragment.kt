@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
-import dev.maxsiomin.domainsearch.activities.login.LoginActivity
 import dev.maxsiomin.domainsearch.base.BaseFragment
 import dev.maxsiomin.domainsearch.databinding.FragmentResetPasswordBinding
 import dev.maxsiomin.domainsearch.util.*
@@ -20,8 +19,6 @@ class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password, fal
 
     override var _binding: ViewDataBinding? = null
     private val binding get() = _binding!! as FragmentResetPasswordBinding
-
-    val loginActivity get() = requireActivity() as LoginActivity
 
     override val mViewModel by viewModels<ResetPasswordViewModel>()
 

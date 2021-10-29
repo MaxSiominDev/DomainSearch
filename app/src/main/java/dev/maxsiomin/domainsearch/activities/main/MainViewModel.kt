@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(uiActions: UiActions) : BaseViewModel(ui
      * Checks for updates. If updates found calls [onUpdateFound]
      */
     fun checkForUpdates(onUpdateFound: (String) -> Unit) {
-        val updateRepository = UpdateRepository(provideUiActions(context)) { result ->
+        val updateRepository = UpdateRepository(this) { result ->
             if (result is Success) {
                 val currentVersionName = BuildConfig.VERSION_NAME
                 if (currentVersionName != result.latestVersionName) {

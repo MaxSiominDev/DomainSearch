@@ -18,7 +18,6 @@ import dev.maxsiomin.domainsearch.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 private const val DEVELOPER_EMAIL = "max@maxsiomin.dev"
@@ -28,6 +27,7 @@ private const val DEVELOPER_WEBSITE = "https://maxsiomin.dev/"
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val mViewModel by viewModels<BaseViewModel>()
+
     private val baseActivity get() = requireActivity() as BaseActivity
 
     @Inject
@@ -56,17 +56,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        val verifyEmailPreference = findPreference(R.string.key_verify_email)
-        verifyEmailPreference.setOnClickListener {
-            auth.currentUser!!.sendEmailVerification().addOnCompleteListener { task ->
-                mViewModel.toast(
-                    if (task.isSuccessful) R.string.check_email else R.string.unable_to_send_email_verification,
-                    Toast.LENGTH_LONG
-                )
+        findPreference(R.string.key_verify_email).apply {
+            // If email already verified email verification shouldn't be sent
+            if (!auth.currentUser!!.isEmailVerified) {
+                setOnClickListener {
+                    isSelectable = true
+                    auth.currentUser!!.sendEmailVerification().addOnCompleteListener { task ->
+                        mViewModel.toast(
+                            if (task.isSuccessful) R.string.check_email else R.string.unable_to_send_email_verification,
+                            Toast.LENGTH_LONG
+                        )
+                    }
+                }
             }
         }
-        // If email already verified email verification shouldn't be sent
-        verifyEmailPreference.isEnabled = !auth.currentUser!!.isEmailVerified
 
         findPreference(R.string.key_log_out).setOnClickListener {
             auth.signOut()

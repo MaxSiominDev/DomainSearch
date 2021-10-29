@@ -13,6 +13,7 @@ import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.activities.login.LoginActivity
 import dev.maxsiomin.domainsearch.base.BaseFragment
 import dev.maxsiomin.domainsearch.databinding.FragmentLoginBinding
+import dev.maxsiomin.domainsearch.fragments.contract.navigator
 import dev.maxsiomin.domainsearch.fragments.resetpassword.ResetPasswordFragment
 import dev.maxsiomin.domainsearch.fragments.signup.SignupFragment
 import dev.maxsiomin.domainsearch.util.*
@@ -73,17 +74,16 @@ class LoginFragment : BaseFragment(R.layout.fragment_login, false) {
             passwordEditText.addTextChangedListener { passwordEditTextLayout.clearError() }
 
             forgotPasswordTextView.setOnClickListener {
-                activityFragmentManager.beginTransaction()
-                    .replace(R.id.login_activity_fragment_container, ResetPasswordFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
+                navigator.launchFragment(R.id.login_activity_fragment_container, ResetPasswordFragment.newInstance())
             }
 
             signupTextView.setOnClickListener {
                 // Do not add to backstack!
-                activityFragmentManager.beginTransaction()
-                    .replace(R.id.login_activity_fragment_container, SignupFragment.newInstance())
-                    .commit()
+                navigator.launchFragment(
+                    R.id.login_activity_fragment_container,
+                    SignupFragment.newInstance(),
+                    addToBackStack = false
+                )
             }
         }
 
