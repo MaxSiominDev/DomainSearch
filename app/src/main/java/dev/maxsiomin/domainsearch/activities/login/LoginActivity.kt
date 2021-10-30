@@ -3,6 +3,7 @@ package dev.maxsiomin.domainsearch.activities.login
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -14,8 +15,10 @@ import dev.maxsiomin.domainsearch.activities.main.MainActivity
 import dev.maxsiomin.domainsearch.base.DialogBuilder
 import dev.maxsiomin.domainsearch.fragments.contract.Navigator
 import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
+import dev.maxsiomin.domainsearch.util.SHARED_DATA
 import dev.maxsiomin.domainsearch.util.SharedData
 import dev.maxsiomin.domainsearch.util.SharedDataImpl
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -34,13 +37,19 @@ class LoginActivity : AppCompatActivity(), Navigator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        sharedData = SharedDataImpl(savedInstanceState?.getBundle(""))
+        sharedData = SharedDataImpl(savedInstanceState?.getBundle(SHARED_DATA))
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.login_activity_fragment_container, LoginFragment.newInstance())
                 .commit()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        Timber.d("onSaveInstanceState called")
+        outState.putBundle(SHARED_DATA, sharedData.toBundle())
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     /**

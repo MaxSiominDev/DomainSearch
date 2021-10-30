@@ -15,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.activities.login.LoginActivity
+import dev.maxsiomin.domainsearch.util.SHARED_DATA
 import dev.maxsiomin.domainsearch.util.SharedData
 import dev.maxsiomin.domainsearch.util.SharedDataImpl
+import dev.maxsiomin.domainsearch.util.SharedDataKeys.EMAIL
 import dev.maxsiomin.domainsearch.util.SharedPrefs
 import timber.log.Timber
 import javax.inject.Inject
@@ -81,7 +83,7 @@ abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListe
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         Timber.d("onSaveInstanceState called")
-        outState.putBundle(SHARED_DATA, sharedData.sharedBundle)
+        outState.putBundle(SHARED_DATA, sharedData.toBundle())
         super.onSaveInstanceState(outState, outPersistentState)
     }
 
@@ -124,9 +126,5 @@ abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListe
         auth.signOut()
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
-    }
-
-    companion object {
-        protected const val SHARED_DATA = "sharedData"
     }
 }

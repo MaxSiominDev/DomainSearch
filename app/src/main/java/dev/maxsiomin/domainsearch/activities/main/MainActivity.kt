@@ -7,7 +7,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.BuildConfig
 import dev.maxsiomin.domainsearch.R
@@ -34,12 +33,10 @@ class MainActivity : BaseActivity(), Updater {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
         val navHostFragment =
             fragmentManager.findFragmentById(R.id.main_activity_fragment_container) as NavHostFragment
 
-        navView.setupWithNavController(navHostFragment.navController)
+        binding.navView.setupWithNavController(navHostFragment.navController)
 
         mViewModel.checkForUpdates { latestVersionName ->
             suggestUpdating(latestVersionName)

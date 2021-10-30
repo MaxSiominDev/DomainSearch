@@ -37,21 +37,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
         // Set onClickListeners for all buttons
-        findPreference(R.string.key_clear_history).setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val historyExists = mViewModel.searchDao.getHistoryLength() > 0
+        findPreference(R.string.key_clear_history).apply {
+            setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val historyExists = mViewModel.searchDao.getHistoryLength() > 0
 
-                if (historyExists)
-                    mViewModel.searchDao.clearHistory()
-
-                val toastString =
                     if (historyExists)
-                        R.string.history_cleared
-                    else
-                        R.string.empty_history
+                        mViewModel.searchDao.clearHistory()
 
-                requireActivity().runOnUiThread {
-                    mViewModel.toast(toastString, Toast.LENGTH_SHORT)
+                    val toastString =
+                        if (historyExists)
+                            R.string.history_cleared
+                        else
+                            R.string.empty_history
+
+                    requireActivity().runOnUiThread {
+                        isSelectable = false
+                        mViewModel.toast(toastString, Toast.LENGTH_SHORT)
+                    }
                 }
             }
         }

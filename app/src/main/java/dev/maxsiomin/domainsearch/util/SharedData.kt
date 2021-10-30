@@ -7,6 +7,8 @@ import dev.maxsiomin.domainsearch.base.BaseFragment
 
 typealias StringSharedDataKey = SharedDataKey<String>
 
+const val SHARED_DATA = "sharedData"
+
 val BaseFragment.sharedData: SharedData
     get() {
         return if (usedByBaseActivity)
@@ -20,16 +22,16 @@ val BaseFragment.sharedData: SharedData
  */
 interface SharedData {
 
-    val sharedBundle: Bundle
-
     fun getSharedString(key: StringSharedDataKey): String?
 
     fun putSharedString(key: StringSharedDataKey, value: String?)
+
+    fun toBundle(): Bundle
 }
 
 class SharedDataImpl(bundle: Bundle?) : SharedData {
 
-    override val sharedBundle: Bundle = bundle ?: Bundle()
+    private val sharedBundle: Bundle = bundle ?: Bundle()
 
     override fun getSharedString(key: StringSharedDataKey): String? =
         sharedBundle.getString(key.value)
@@ -40,6 +42,8 @@ class SharedDataImpl(bundle: Bundle?) : SharedData {
         else
             sharedBundle.putString(key.value, value)
     }
+
+    override fun toBundle(): Bundle = sharedBundle
 }
 
 @Suppress("unused")
