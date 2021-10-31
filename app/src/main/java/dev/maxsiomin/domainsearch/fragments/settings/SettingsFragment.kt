@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.preference.Preference
+import androidx.preference.Preference.OnPreferenceClickListener
 import androidx.preference.PreferenceFragmentCompat
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,6 +16,7 @@ import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.base.APK_LOCATION
 import dev.maxsiomin.domainsearch.base.BaseActivity
 import dev.maxsiomin.domainsearch.base.BaseViewModel
+import dev.maxsiomin.domainsearch.util.isNotEmailVerified
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,9 +63,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         findPreference(R.string.key_verify_email).apply {
             // If email already verified email verification shouldn't be sent
-            if (!auth.currentUser!!.isEmailVerified) {
+            if (auth.currentUser!!.isNotEmailVerified) {
+                isVisible = true
                 setOnClickListener {
-                    isSelectable = true
                     auth.currentUser!!.sendEmailVerification().addOnCompleteListener { task ->
                         mViewModel.toast(
                             if (task.isSuccessful) R.string.check_email else R.string.unable_to_send_email_verification,
@@ -94,8 +96,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference(R.string.key_app_version).summary = BuildConfig.VERSION_NAME
     }
 
-    private fun findPreference(key: Int): Preference =
-        super.findPreference(mViewModel.getString(key))!!
+    private fun findPreference(key: Int) = findPreference<Preference>(mViewModel.getString(key))!!
 
     /**
      * Open mail client and write letter to me
@@ -125,12 +126,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun moreApps() {
-        baseActivity.openInBrowser(DEVELOPER_WEBSITE)
-    }
+    private fun moreApps() = baseActivity.openInBrowser(DEVELOPER_WEBSITE)
 
     private fun Preference.setOnClickListener(onClick: () -> Unit) {
-        this.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+        onPreferenceClickListener = OnPreferenceClickListener {
             onClick()
             true
         }

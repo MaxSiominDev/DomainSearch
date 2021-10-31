@@ -2,6 +2,10 @@
 Domain Search app allows you to search for what each domain is used for. For example, if you search domain ".us", app will show "USA":
 
 <img src="https://maxsiomin.dev/apps/domain_search/search_us.jpg" alt="Usage example" width="200"/>
+
+## Requirements
+
+Any Android 5.0+ device
  
 ## Installation
 

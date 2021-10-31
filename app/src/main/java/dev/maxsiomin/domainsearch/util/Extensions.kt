@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseUser
 import java.lang.StringBuilder
 
 /**
@@ -81,3 +82,5 @@ operator fun String.contains(other: CharRange): Boolean {
     }
     return false
 }
+
+val FirebaseUser.isNotEmailVerified get() = !isEmailVerified

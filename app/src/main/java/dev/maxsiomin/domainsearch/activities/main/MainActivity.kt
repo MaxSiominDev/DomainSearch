@@ -34,13 +34,11 @@ class MainActivity : BaseActivity(), Updater {
         setContentView(binding.root)
 
         val navHostFragment =
-            fragmentManager.findFragmentById(R.id.main_activity_fragment_container) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.main_activity_fragment_container) as NavHostFragment
 
         binding.navView.setupWithNavController(navHostFragment.navController)
 
-        mViewModel.checkForUpdates { latestVersionName ->
-            suggestUpdating(latestVersionName)
-        }
+        mViewModel.checkForUpdates { latestVersionName -> suggestUpdating(latestVersionName) }
     }
 
     /**

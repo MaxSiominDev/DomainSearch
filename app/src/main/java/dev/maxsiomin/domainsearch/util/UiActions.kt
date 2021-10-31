@@ -45,11 +45,6 @@ class UiActionsImpl(override val context: Context) : UiActions {
 
     override val searchDao: SearchDao = SearchDatabase.getInstance(context).searchDao()
 
-    /**
-     * Contains strings that were already loaded from resources
-     */
-    private val strings = mutableMapOf<@StringRes Int, String>()
-
     private val inputMethodManager
         get() = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -59,17 +54,26 @@ class UiActionsImpl(override val context: Context) : UiActions {
     override fun toast(message: String, length: Int) =
         Toast.makeText(context, message, length).show()
 
+    private data class ResIdWithArgs(
+        @StringRes val resId: Int,
+        val args: List<Any>,
+    )
+
     /**
-     * If string has no arguments and were already loaded returns it from [strings]
+     * Contains strings that were already loaded from resources
+     */
+    private val strings = mutableMapOf<ResIdWithArgs, String>()
+
+    /**
+     * If string were already loaded returns it from [strings] else uses context to get the string from resources
      */
     override fun getString(resId: Int, vararg args: Any): String {
-        if (args.isNotEmpty())
-            return context.getString(resId, *args)
+        val resIdWithArgs = ResIdWithArgs(resId, args.toList())
 
-        if (strings[resId] == null)
-            strings[resId] = context.getString(resId)
+        if (strings[resIdWithArgs] == null)
+            strings[resIdWithArgs] = context.getString(resId)
 
-        return strings[resId]!!
+        return strings[resIdWithArgs]!!
     }
 
     override fun hideKeyboard(windowToken: IBinder) {

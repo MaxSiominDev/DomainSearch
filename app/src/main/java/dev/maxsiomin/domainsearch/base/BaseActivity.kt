@@ -18,17 +18,16 @@ import dev.maxsiomin.domainsearch.activities.login.LoginActivity
 import dev.maxsiomin.domainsearch.util.SHARED_DATA
 import dev.maxsiomin.domainsearch.util.SharedData
 import dev.maxsiomin.domainsearch.util.SharedDataImpl
-import dev.maxsiomin.domainsearch.util.SharedDataKeys.EMAIL
 import dev.maxsiomin.domainsearch.util.SharedPrefs
 import timber.log.Timber
 import javax.inject.Inject
 
 typealias DialogBuilder = AlertDialog.Builder
 
-const val APK_LOCATION = "https://maxsiomin.dev/apps/domain_search/domain_search_apk.apk"
+const val APK_LOCATION = "https://maxsiomin.dev/apps/domain_search/domain_search.apk"
 
 /**
- * All activities in project must extend this class
+ * All activities in project except [LoginActivity] must extend this class
  */
 @AndroidEntryPoint
 abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
@@ -37,10 +36,8 @@ abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListe
 
     protected open val mViewModel by viewModels<BaseViewModel>()
 
-    protected open val fragmentManager get() = supportFragmentManager
-
-    protected open val keyTheme: String get() = mViewModel.getString(R.string.key_theme)
-    protected open val themeFollowSystem = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM.toString()
+    protected val keyTheme: String get() = mViewModel.getString(R.string.key_theme)
+    protected val themeFollowSystem = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM.toString()
 
     @Inject
     lateinit var auth: FirebaseAuth
@@ -62,7 +59,7 @@ abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListe
      * If user isn't logged in calls [goToLoginScreen]
      */
     private fun checkLogin() {
-        auth.currentUser?.reload()?.addOnFailureListener {
+        auth.currentUser?.reload()?.addOnFailureListener { _ ->
             goToLoginScreen()
         } ?: goToLoginScreen()
     }

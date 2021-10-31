@@ -2,7 +2,6 @@ package dev.maxsiomin.domainsearch
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import dev.maxsiomin.domainsearch.util.removeAll
 import timber.log.Timber
 
 @HiltAndroidApp
