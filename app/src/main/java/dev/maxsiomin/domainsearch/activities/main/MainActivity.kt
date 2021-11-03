@@ -45,8 +45,7 @@ class MainActivity : BaseActivity(), Updater {
      * Suggests user to update app via [UpdateDialog]
      */
     private fun suggestUpdating(latestVersionName: String) {
-        val dialog = UpdateDialog.newInstance(latestVersionName)
-        dialog.show(supportFragmentManager)
+        UpdateDialog.newInstance(latestVersionName).show(supportFragmentManager)
     }
 
     /**
