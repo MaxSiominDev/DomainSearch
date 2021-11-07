@@ -1,4 +1,4 @@
-﻿# Domain Search &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE)
+﻿# Domain Search &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 Domain Search app allows you to search for what each domain is used for. For example, if you search domain ".us", app will show "USA":
 
 <img src="https://maxsiomin.dev/apps/domain_search/search_us.jpg" alt="Usage example" width="200"/>
