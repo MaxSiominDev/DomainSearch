@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.activities.main.MainActivity
@@ -30,12 +33,16 @@ class LoginActivity : AppCompatActivity(), Navigator {
 
     lateinit var sharedData: SharedData
 
+    private lateinit var analytics: FirebaseAnalytics
+
     @Inject
     lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        analytics = Firebase.analytics
 
         sharedData = SharedDataImpl(savedInstanceState?.getBundle(SHARED_DATA))
 

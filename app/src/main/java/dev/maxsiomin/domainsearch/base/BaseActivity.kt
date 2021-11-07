@@ -11,7 +11,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.activities.login.LoginActivity
@@ -34,6 +37,8 @@ abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListe
 
     lateinit var sharedData: SharedData
 
+    private lateinit var analytics: FirebaseAnalytics
+
     protected open val mViewModel by viewModels<BaseViewModel>()
 
     protected val keyTheme: String get() = mViewModel.getString(R.string.key_theme)
@@ -45,6 +50,8 @@ abstract class BaseActivity : AppCompatActivity(), OnSharedPreferenceChangeListe
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate called")
         super.onCreate(savedInstanceState)
+
+        analytics = Firebase.analytics
 
         sharedData = SharedDataImpl(savedInstanceState?.getBundle(SHARED_DATA))
 
