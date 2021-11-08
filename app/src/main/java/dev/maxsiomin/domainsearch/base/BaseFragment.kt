@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 /**
  * All fragments in project except fragments of LoginActivity must extend this class
  */
-abstract class BaseFragment(@LayoutRes private val resId: Int, val usedByBaseActivity: Boolean) : Fragment(resId) {
+abstract class BaseFragment(@LayoutRes private val resId: Int) : Fragment(resId) {
 
     protected open val mViewModel by viewModels<BaseViewModel>()
 

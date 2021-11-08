@@ -23,7 +23,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment(R.layout.fragment_login, false) {
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     override var _binding: ViewDataBinding? = null
     private val binding get() = _binding!! as FragmentLoginBinding

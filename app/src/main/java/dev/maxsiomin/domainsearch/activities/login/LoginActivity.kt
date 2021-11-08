@@ -14,8 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
+import dev.maxsiomin.domainsearch.activities.main.DialogBuilder
 import dev.maxsiomin.domainsearch.activities.main.MainActivity
-import dev.maxsiomin.domainsearch.base.DialogBuilder
 import dev.maxsiomin.domainsearch.fragments.contract.Navigator
 import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
 import dev.maxsiomin.domainsearch.util.SHARED_DATA
@@ -25,8 +25,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * The only activity in application that doesn't extend BaseActivity
- * Contains 3 Fragments: LoginFragment, SignupFragment, ResetPasswordFragment
+ * Uses 3 Fragments: LoginFragment, SignupFragment, ResetPasswordFragment
  */
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity(), Navigator {

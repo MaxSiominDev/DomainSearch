@@ -13,8 +13,9 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.BuildConfig
 import dev.maxsiomin.domainsearch.R
-import dev.maxsiomin.domainsearch.base.APK_LOCATION
-import dev.maxsiomin.domainsearch.base.BaseActivity
+import dev.maxsiomin.domainsearch.activities.main.APK_LOCATION
+import dev.maxsiomin.domainsearch.activities.main.MainActivity
+import dev.maxsiomin.domainsearch.activities.main.openInBrowser
 import dev.maxsiomin.domainsearch.base.BaseViewModel
 import dev.maxsiomin.domainsearch.util.isNotEmailVerified
 import kotlinx.coroutines.CoroutineScope
@@ -29,8 +30,6 @@ private const val DEVELOPER_WEBSITE = "https://maxsiomin.dev/"
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val mViewModel by viewModels<BaseViewModel>()
-
-    private val baseActivity get() = requireActivity() as BaseActivity
 
     @Inject
     lateinit var auth: FirebaseAuth
@@ -78,7 +77,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         findPreference(R.string.key_log_out).setOnClickListener {
             auth.signOut()
-            baseActivity.onLogout()
+            (activity as MainActivity).onLogout()
         }
 
         findPreference(R.string.key_help_and_feedback).setOnClickListener {
@@ -126,7 +125,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun moreApps() = baseActivity.openInBrowser(DEVELOPER_WEBSITE)
+    private fun moreApps() = requireActivity().openInBrowser(DEVELOPER_WEBSITE)
 
     private fun Preference.setOnClickListener(onClick: () -> Unit) {
         onPreferenceClickListener = OnPreferenceClickListener {

@@ -2,8 +2,9 @@ package dev.maxsiomin.domainsearch.util
 
 import android.os.Bundle
 import dev.maxsiomin.domainsearch.activities.login.LoginActivity
-import dev.maxsiomin.domainsearch.base.BaseActivity
+import dev.maxsiomin.domainsearch.activities.main.MainActivity
 import dev.maxsiomin.domainsearch.base.BaseFragment
+import java.lang.IllegalStateException
 
 typealias StringSharedDataKey = SharedDataKey<String>
 
@@ -11,10 +12,11 @@ const val SHARED_DATA = "sharedData"
 
 val BaseFragment.sharedData: SharedData
     get() {
-        return if (usedByBaseActivity)
-            (requireActivity() as BaseActivity).sharedData
-        else
-            (requireActivity() as LoginActivity).sharedData
+        return when (val activity = requireActivity()) {
+            is MainActivity -> activity.sharedData
+            is LoginActivity -> activity.sharedData
+            else -> throw IllegalStateException()
+        }
     }
 
 /**

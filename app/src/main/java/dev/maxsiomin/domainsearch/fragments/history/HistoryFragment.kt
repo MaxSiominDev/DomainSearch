@@ -17,7 +17,7 @@ import javax.inject.Inject
  * Fragment with search history
  */
 @AndroidEntryPoint
-class HistoryFragment : BaseFragment(R.layout.fragment_history, true) {
+class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
     private var columnCount = 1
 

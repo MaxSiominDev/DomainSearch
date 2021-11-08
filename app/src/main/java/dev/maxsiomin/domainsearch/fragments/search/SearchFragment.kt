@@ -17,7 +17,7 @@ import dev.maxsiomin.domainsearch.util.sharedData
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment(R.layout.fragment_search, true) {
+class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
     override var _binding: ViewDataBinding? = null
     private val binding get() = _binding!! as FragmentSearchBinding

@@ -21,7 +21,7 @@ import dev.maxsiomin.domainsearch.util.SharedDataKeys.PASSWORD
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SignupFragment : BaseFragment(R.layout.fragment_signup, false) {
+class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
     override var _binding: ViewDataBinding? = null
     private val binding get() = _binding!! as FragmentSignupBinding

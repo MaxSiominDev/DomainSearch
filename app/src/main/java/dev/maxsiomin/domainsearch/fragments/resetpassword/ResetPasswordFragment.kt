@@ -15,7 +15,7 @@ import dev.maxsiomin.domainsearch.databinding.FragmentResetPasswordBinding
 import dev.maxsiomin.domainsearch.util.*
 
 @AndroidEntryPoint
-class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password, false) {
+class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password) {
 
     override var _binding: ViewDataBinding? = null
     private val binding get() = _binding!! as FragmentResetPasswordBinding
