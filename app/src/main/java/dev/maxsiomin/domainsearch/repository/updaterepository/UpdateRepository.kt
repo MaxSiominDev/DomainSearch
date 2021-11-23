@@ -26,4 +26,3 @@ class UpdateRepository(uiActions: UiActions, private val callback: (LastVersionS
         }
     }
 }
-
