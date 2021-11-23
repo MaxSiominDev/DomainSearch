@@ -12,7 +12,7 @@ class UpdateRepository(uiActions: UiActions, private val callback: (LastVersionS
     /**
      * Searches for last version of app on my server
      */
-    fun searchForLatVersion() {
+    fun searchForLastVersion() {
         UpdateApi.retrofitService.getLastVersion().addOnCompleteListener { result ->
 
             if (result.isSuccessful) {
@@ -20,7 +20,7 @@ class UpdateRepository(uiActions: UiActions, private val callback: (LastVersionS
             } else {
                 Timber.e(result.t)
 
-                val errorMessage = result.t?.message.notNull()
+                val errorMessage = result.t?.message?.notNull()
                 callback(Failure(isConnectionError(errorMessage), errorMessage))
             }
         }

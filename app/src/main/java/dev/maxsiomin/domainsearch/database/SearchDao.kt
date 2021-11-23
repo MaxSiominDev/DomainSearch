@@ -35,7 +35,6 @@ interface SearchDao {
     @Query(value = "SELECT id FROM 'cachingTable' WHERE domain=:desiredDomain")
     suspend fun findIdByDomain(desiredDomain: String): Int?
 
-
     /**
      * Inserts a [searchQuery] to [SearchDatabase]
      */
@@ -43,7 +42,7 @@ interface SearchDao {
     suspend fun insertQuery(searchQuery: SearchQuery)
 
     /**
-     * Returns list queries in [SearchDatabase]
+     * Returns list of queries in [SearchDatabase]
      */
     @Query(value = "SELECT * FROM 'historyTable'")
     suspend fun loadHistory(): List<SearchQuery>
@@ -56,5 +55,4 @@ interface SearchDao {
      */
     @Query(value = "DELETE FROM 'historyTable'")
     suspend fun clearHistory()
-
 }
