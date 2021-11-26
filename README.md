@@ -15,9 +15,6 @@ Any Android 5.0+ device where Google Services are available
 git clone https://github.com/MaxSiominDev/DomainSearch.git
 ```
 
-## For developers
-Check out [build.gradle file](./app/build.gradle)
-
 ## License 
 Domain Search is [MIT licensed](./LICENSE).
 
