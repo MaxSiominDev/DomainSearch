@@ -16,6 +16,7 @@ import dev.maxsiomin.domainsearch.databinding.FragmentSignupBinding
 import dev.maxsiomin.domainsearch.fragments.contract.navigator
 import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
 import dev.maxsiomin.domainsearch.util.*
+import dev.maxsiomin.domainsearch.util.Password.Companion.PASSWORD_MIN_LENGTH
 import dev.maxsiomin.domainsearch.util.SharedDataKeys.EMAIL
 import dev.maxsiomin.domainsearch.util.SharedDataKeys.PASSWORD
 import javax.inject.Inject
