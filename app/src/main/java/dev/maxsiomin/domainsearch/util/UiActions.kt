@@ -54,7 +54,7 @@ class UiActionsImpl(override val context: Context) : UiActions {
     override fun toast(message: String, length: Int) =
         Toast.makeText(context, message, length).show()
 
-    override fun getString(resId: Int, vararg args: Any): String = context.getString(resId, args)
+    override fun getString(resId: Int, vararg args: Any): String = context.getString(resId, *args)
 
     override fun hideKeyboard(windowToken: IBinder) {
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
