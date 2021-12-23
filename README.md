@@ -5,7 +5,7 @@ Domain Search app allows you to search for what each domain is used for. For exa
 
 ## Requirements
 
-Any Android 5.0+ device where Google Services are available
+Any Android 8.0+ device where Google Services are available
  
 ## Installation
 
