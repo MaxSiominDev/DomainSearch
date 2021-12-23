@@ -5,29 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.viewbinding.ViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.base.BaseFragment
 import dev.maxsiomin.domainsearch.databinding.FragmentSearchBinding
-import dev.maxsiomin.domainsearch.util.SharedDataKeys.QUERY
-import dev.maxsiomin.domainsearch.util.notNull
-import dev.maxsiomin.domainsearch.util.sharedData
+import dev.maxsiomin.domainsearch.extensions.notNull
 import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
-    override var _binding: ViewDataBinding? = null
-    private val binding get() = _binding!! as FragmentSearchBinding
+    override var _binding: ViewBinding? = null
+    private val binding get() = _binding as FragmentSearchBinding
 
     override val mViewModel by viewModels<SearchViewModel>()
 
     /** Last query in search view in SearchFragment */
-    private var searchViewQuery: String
-        get() = sharedData.getSharedString(QUERY).notNull()
-        set(value) = sharedData.putSharedString(QUERY, value)
+    private var searchViewQuery: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

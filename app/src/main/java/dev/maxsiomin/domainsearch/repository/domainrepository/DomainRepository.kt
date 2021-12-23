@@ -2,11 +2,11 @@ package dev.maxsiomin.domainsearch.repository.domainrepository
 
 import dev.maxsiomin.domainsearch.base.BaseRepository
 import dev.maxsiomin.domainsearch.database.Domain
+import dev.maxsiomin.domainsearch.extensions.notNull
 import dev.maxsiomin.domainsearch.network.DomainsApi
 import dev.maxsiomin.domainsearch.network.DomainsApiQueryResult
 import dev.maxsiomin.domainsearch.util.UiActions
 import dev.maxsiomin.domainsearch.util.addOnCompleteListener
-import dev.maxsiomin.domainsearch.util.notNull
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,13 +59,7 @@ class DomainRepository @Inject constructor(
     private fun onSuccess(domain: String, response: Response<DomainsApiQueryResult>) {
         CoroutineScope(Dispatchers.IO).launch {
 
-            val body = response.body()!!
-
-            val description = if (response.isSuccessful) {
-                body.result ?: "fuckingHell"
-            } else {
-                EMPTY
-            }
+            val description = response.body()?.result ?: EMPTY
 
             with (searchDao) {
                 val id = findIdByDomain(domain) ?: 0
@@ -75,15 +69,11 @@ class DomainRepository @Inject constructor(
             val status =
                 when (description) {
                     EMPTY -> Status.NOT_FOUND
-                    ERROR -> Status.FAILURE
                     else -> Status.FOUND
                 }
 
             callback(
-                if (status != Status.FAILURE)
-                    Success(domain, description, status)
-                else
-                    Failure(domain, false, null)
+                Success(domain, description, status)
             )
         }
     }

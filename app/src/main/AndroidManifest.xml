@@ -16,18 +16,15 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".activities.login.LoginActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".activities.main.MainActivity"
             android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <nav-graph android:value="@navigation/main_graph" />
 
         </activity>
 

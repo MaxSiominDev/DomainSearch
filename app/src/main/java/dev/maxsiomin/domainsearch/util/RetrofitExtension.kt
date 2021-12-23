@@ -1,6 +1,8 @@
 package dev.maxsiomin.domainsearch.util
 
-import retrofit2.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 fun <T> Call<T>.addOnCompleteListener(onResult: (RetrofitResult<T>) -> Unit) {
     this.enqueue(object : Callback<T> {

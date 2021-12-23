@@ -1,37 +1,32 @@
 package dev.maxsiomin.domainsearch.fragments.resetpassword
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.viewbinding.ViewBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.base.BaseFragment
 import dev.maxsiomin.domainsearch.databinding.FragmentResetPasswordBinding
-import dev.maxsiomin.domainsearch.util.*
+import dev.maxsiomin.domainsearch.extensions.clearError
+import dev.maxsiomin.domainsearch.util.Email
 
 @AndroidEntryPoint
 class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password) {
 
-    override var _binding: ViewDataBinding? = null
-    private val binding get() = _binding!! as FragmentResetPasswordBinding
+    override var _binding: ViewBinding? = null
+    private val binding get() = _binding as FragmentResetPasswordBinding
 
     override val mViewModel by viewModels<ResetPasswordViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentResetPasswordBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentResetPasswordBinding.bind(view)
 
         with (binding) {
-            emailEditText.text = sharedData.getSharedString(SharedDataKeys.EMAIL).notNull().toEditable()
-
             resetPasswordButton.setOnClickListener {
                 val email = Email(emailEditText.text)
 
@@ -47,18 +42,5 @@ class ResetPasswordFragment : BaseFragment(R.layout.fragment_reset_password) {
                 emailEditTextLayout.clearError()
             }
         }
-
-        return binding.root
-    }
-
-    override fun onStop() {
-        sharedData.putSharedString(SharedDataKeys.EMAIL, binding.emailEditText.text?.toString())
-        super.onStop()
-    }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance() = ResetPasswordFragment()
     }
 }

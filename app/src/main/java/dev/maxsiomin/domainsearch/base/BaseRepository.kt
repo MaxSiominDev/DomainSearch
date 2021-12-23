@@ -1,7 +1,7 @@
 package dev.maxsiomin.domainsearch.base
 
+import dev.maxsiomin.domainsearch.extensions.notNull
 import dev.maxsiomin.domainsearch.util.UiActions
-import dev.maxsiomin.domainsearch.util.notNull
 
 /**
  * All repositories in project must extend this class

@@ -5,6 +5,7 @@ import androidx.core.view.allViews
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewbinding.ViewBinding
 
 /**
  * All fragments in project except fragments of LoginActivity must extend this class
@@ -14,7 +15,7 @@ abstract class BaseFragment(@LayoutRes private val resId: Int) : Fragment(resId)
     protected open val mViewModel by viewModels<BaseViewModel>()
 
     @Suppress("PropertyName")
-    abstract var _binding: ViewDataBinding?
+    abstract var _binding: ViewBinding?
 
     // This property is only valid between onCreateView and onDestroyView
     private val binding get() = _binding!!

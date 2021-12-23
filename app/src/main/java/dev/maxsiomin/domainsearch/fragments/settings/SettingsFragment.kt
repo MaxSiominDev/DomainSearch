@@ -6,18 +6,19 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
-import androidx.preference.Preference.OnPreferenceClickListener
 import androidx.preference.PreferenceFragmentCompat
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import dev.maxsiomin.domainsearch.BuildConfig
+import dev.maxsiomin.domainsearch.APK_LOCATION
+import dev.maxsiomin.domainsearch.App
 import dev.maxsiomin.domainsearch.R
-import dev.maxsiomin.domainsearch.activities.main.APK_LOCATION
-import dev.maxsiomin.domainsearch.activities.main.MainActivity
-import dev.maxsiomin.domainsearch.activities.main.openInBrowser
 import dev.maxsiomin.domainsearch.base.BaseViewModel
-import dev.maxsiomin.domainsearch.util.isNotEmailVerified
+import dev.maxsiomin.domainsearch.extensions.addOnPreferenceChangeListener
+import dev.maxsiomin.domainsearch.extensions.isNotEmailVerified
+import dev.maxsiomin.domainsearch.extensions.openInBrowser
+import dev.maxsiomin.domainsearch.extensions.setOnClickListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,6 +37,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
+        findPreference(R.string.key_theme).addOnPreferenceChangeListener {
+            val app = requireActivity().application as App
+            app.setupTheme(it as String)
+        }
 
         // Set onClickListeners for all buttons
         findPreference(R.string.key_clear_history).apply {
@@ -77,7 +83,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         findPreference(R.string.key_log_out).setOnClickListener {
             auth.signOut()
-            (activity as MainActivity).onLogout()
+
+            val navHostFragment = this.parentFragment!!
+            val tabsFragment = navHostFragment.parentFragment!!
+
+            tabsFragment.findNavController().popBackStack()
         }
 
         findPreference(R.string.key_help_and_feedback).setOnClickListener {
@@ -92,7 +102,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             moreApps()
         }
 
-        findPreference(R.string.key_app_version).summary = BuildConfig.VERSION_NAME
+        findPreference(R.string.key_app_version).summary = App.VERSION
     }
 
     private fun findPreference(key: Int) = findPreference<Preference>(mViewModel.getString(key))!!
@@ -126,11 +136,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun moreApps() = requireActivity().openInBrowser(DEVELOPER_WEBSITE)
-
-    private fun Preference.setOnClickListener(onClick: () -> Unit) {
-        onPreferenceClickListener = OnPreferenceClickListener {
-            onClick()
-            true
-        }
-    }
 }

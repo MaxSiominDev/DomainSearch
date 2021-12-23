@@ -12,6 +12,10 @@ import dev.maxsiomin.domainsearch.base.BaseViewModel
 import dev.maxsiomin.domainsearch.base.stringMutableLiveData
 import dev.maxsiomin.domainsearch.database.SearchQuery
 import dev.maxsiomin.domainsearch.di.AppModule
+import dev.maxsiomin.domainsearch.extensions.addPrefix
+import dev.maxsiomin.domainsearch.extensions.isCorrectAsDomain
+import dev.maxsiomin.domainsearch.extensions.removeAll
+import dev.maxsiomin.domainsearch.extensions.surroundWith
 import dev.maxsiomin.domainsearch.repository.domainrepository.*
 import dev.maxsiomin.domainsearch.util.*
 import kotlinx.coroutines.CoroutineScope

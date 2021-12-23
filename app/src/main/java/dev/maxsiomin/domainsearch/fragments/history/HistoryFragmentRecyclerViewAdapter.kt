@@ -10,7 +10,7 @@ import dev.maxsiomin.domainsearch.util.UiActions
  * Recycler view adapter for [HistoryFragment]
  */
 class HistoryItemRecyclerViewAdapter(
-    private val uiActions: UiActions,
+    uiActions: UiActions,
     private val values: List<HistoryLoader.PlaceholderItem>,
 ) : RecyclerView.Adapter<HistoryItemRecyclerViewAdapter.ViewHolder>(), UiActions by uiActions {
 

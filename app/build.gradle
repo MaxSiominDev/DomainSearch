@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -12,11 +13,11 @@ android {
 
     defaultConfig {
         applicationId "dev.maxsiomin.domainsearch"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 31
-        versionCode 7
+        versionCode 8
         multiDexEnabled true
-        versionName "1.6"
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,7 +90,6 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Navigation component
-    def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -114,6 +114,6 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.android.gms:play-services-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.1'
 }

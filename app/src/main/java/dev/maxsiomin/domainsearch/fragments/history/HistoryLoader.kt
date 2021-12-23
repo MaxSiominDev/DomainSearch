@@ -3,9 +3,9 @@ package dev.maxsiomin.domainsearch.fragments.history
 import androidx.lifecycle.MutableLiveData
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.database.SearchQuery
+import dev.maxsiomin.domainsearch.extensions.addPrefix
 import dev.maxsiomin.domainsearch.repository.domainrepository.Status
 import dev.maxsiomin.domainsearch.util.UiActions
-import dev.maxsiomin.domainsearch.util.addPrefix
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

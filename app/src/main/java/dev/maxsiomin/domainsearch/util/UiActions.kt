@@ -10,6 +10,7 @@ import androidx.annotation.StringRes
 import dev.maxsiomin.domainsearch.annotations.ToastDuration
 import dev.maxsiomin.domainsearch.database.SearchDao
 import dev.maxsiomin.domainsearch.database.SearchDatabase
+import dev.maxsiomin.domainsearch.extensions.getDefaultSharedPrefs
 
 typealias SharedPrefs = android.content.SharedPreferences
 

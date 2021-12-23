@@ -1,53 +1,44 @@
 package dev.maxsiomin.domainsearch.fragments.signup
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.R
-import dev.maxsiomin.domainsearch.activities.login.LoginActivity
+import dev.maxsiomin.domainsearch.activities.main.DialogBuilder
 import dev.maxsiomin.domainsearch.base.BaseFragment
 import dev.maxsiomin.domainsearch.databinding.FragmentSignupBinding
-import dev.maxsiomin.domainsearch.fragments.contract.navigator
-import dev.maxsiomin.domainsearch.fragments.login.LoginFragment
-import dev.maxsiomin.domainsearch.util.*
+import dev.maxsiomin.domainsearch.extensions.clearError
+import dev.maxsiomin.domainsearch.util.Email
+import dev.maxsiomin.domainsearch.util.Password
 import dev.maxsiomin.domainsearch.util.Password.Companion.PASSWORD_MIN_LENGTH
-import dev.maxsiomin.domainsearch.util.SharedDataKeys.EMAIL
-import dev.maxsiomin.domainsearch.util.SharedDataKeys.PASSWORD
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
-    override var _binding: ViewDataBinding? = null
-    private val binding get() = _binding!! as FragmentSignupBinding
+    override var _binding: ViewBinding? = null
+    private val binding get() = _binding as FragmentSignupBinding
 
     override val mViewModel by viewModels<SignupViewModel>()
-
-    private val loginActivity get() = requireActivity() as LoginActivity
 
     @Inject
     lateinit var auth: FirebaseAuth
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentSignupBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSignupBinding.bind(view)
 
         with (binding) {
-            emailEditText.text = sharedData.getSharedString(EMAIL).notNull().toEditable()
-            passwordEditText.text = sharedData.getSharedString(PASSWORD).notNull().toEditable()
-
-            loginTextView.setOnClickListener {
-                navigator.launchFragment(R.id.login_activity_fragment_container, LoginFragment.newInstance())
-            }
+            loginTextView.setOnClickListener { findNavController().popBackStack() }
 
             signupButton.setOnClickListener {
                 val email = Email(emailEditText.text)
@@ -72,7 +63,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
                     else -> {
                         mViewModel.signup(email, password, auth) {
                             auth.signInWithEmailAndPassword(email.value, password.value).addOnCompleteListener {
-                                loginActivity.onSignup()
+                                VerifyEmailDialog.newInstance().show(parentFragmentManager)
                             }
                         }
                     }
@@ -92,18 +83,48 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             }
         }
 
-        return binding.root
     }
 
-    override fun onStop() {
-        sharedData.putSharedString(EMAIL, binding.emailEditText.text?.toString())
-        sharedData.putSharedString(PASSWORD, binding.passwordEditText.text?.toString())
-        super.onStop()
-    }
+    /**
+     * Suggest user to verify email. It's not mandatory
+     */
+    class VerifyEmailDialog : DialogFragment() {
 
-    companion object {
+        @Inject
+        lateinit var auth: FirebaseAuth
 
-        @JvmStatic
-        fun newInstance() = SignupFragment()
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+            val dialog = DialogBuilder(requireContext())
+                .setMessage(R.string.want_verify_email)
+                .setNegativeButton(R.string.no_thanks) { _, _ ->
+                    goToTabsFragment()
+                }
+                .setPositiveButton(R.string.verify) { _, _ ->
+                    auth.currentUser!!.sendEmailVerification()
+                    goToTabsFragment()
+                }
+                .create()
+
+            dialog.setCanceledOnTouchOutside(false)
+
+            return dialog
+        }
+
+        private fun goToTabsFragment() {
+            parentFragment!!.findNavController().navigate(R.id.action_signupFragment_to_tabsFragment)
+        }
+
+        fun show(manager: FragmentManager) {
+            show(manager, TAG)
+        }
+
+        companion object {
+
+            const val TAG = "VerifyEmailDialog"
+
+            @JvmStatic
+            fun newInstance() = VerifyEmailDialog()
+        }
     }
 }
