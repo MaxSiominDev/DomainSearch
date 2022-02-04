@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(uiActions: UiActions) : BaseViewModel(ui
         if (LocalDate.now().toString() == sharedPrefs.getString(DATE_UPDATE_SUGGESTED, null))
             return
 
-        UpdateRepository(this) { result ->
+        val repository = UpdateRepository(this as UiActions) { result ->
             if (result is Success) {
                 val currentVersionName = BuildConfig.VERSION_NAME
                 if (currentVersionName != result.latestVersionName) {
@@ -35,6 +35,8 @@ class MainViewModel @Inject constructor(uiActions: UiActions) : BaseViewModel(ui
                 toast(R.string.last_version_checking_failed, Toast.LENGTH_LONG)
                 Timber.e((result as Failure).errorMessage)
             }
-        }.getLastVersion()
+        }
+
+        repository.getLastVersion()
     }
 }

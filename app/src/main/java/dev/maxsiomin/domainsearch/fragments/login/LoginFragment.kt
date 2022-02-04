@@ -39,8 +39,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         _binding = FragmentLoginBinding.bind(view)
 
         with (binding) {
-            //emailEditText.text = sharedData.getSharedString(EMAIL).notNull().toEditable()
-            //passwordEditText.text = sharedData.getSharedString(PASSWORD).notNull().toEditable()
 
             loginButton.setOnClickListener {
                 val email = Email(emailEditText.text)
