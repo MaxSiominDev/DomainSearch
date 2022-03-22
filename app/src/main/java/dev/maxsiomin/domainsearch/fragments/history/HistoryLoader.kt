@@ -18,7 +18,11 @@ class HistoryLoader(uiActions: UiActions) : UiActions by uiActions {
     val itemsLiveData = MutableLiveData<List<PlaceholderItem>>()
     private val items = mutableListOf<PlaceholderItem>()
 
-    init { CoroutineScope(Dispatchers.IO).launch { getHistory() } }
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            getHistory()
+        }
+    }
 
     /**
      * Loads history from Database and updates [itemsLiveData]

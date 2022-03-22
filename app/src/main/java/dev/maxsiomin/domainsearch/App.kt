@@ -9,7 +9,9 @@ import timber.log.Timber
 @HiltAndroidApp
 class App : Application() {
 
-    private val keyTheme get() = getString(R.string.key_theme)
+    private val keyTheme by lazy {
+        getString(R.string.key_theme)
+    }
 
     init {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
