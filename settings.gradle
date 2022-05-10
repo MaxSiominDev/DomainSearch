@@ -5,7 +5,6 @@ dependencyResolutionManagement {
         mavenCentral()
 
         maven { url 'https://jitpack.io' }
-        maven { url 'https://dl.bintray.com/hummatli/maven/' }
     }
 }
 rootProject.name = "Domain search"

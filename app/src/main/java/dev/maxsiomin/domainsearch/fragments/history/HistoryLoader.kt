@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
  */
 class HistoryLoader(uiActions: UiActions) : UiActions by uiActions {
 
-    val itemsLiveData = MutableLiveData<List<PlaceholderItem>>()
-    private val items = mutableListOf<PlaceholderItem>()
+    val itemsLiveData = MutableLiveData<List<RecyclerViewItem>>()
+    private val items = mutableListOf<RecyclerViewItem>()
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
@@ -48,13 +48,13 @@ class HistoryLoader(uiActions: UiActions) : UiActions by uiActions {
     }
 
     /**
-     * Returns new [PlaceholderItem]
+     * Returns new [RecyclerViewItem]
      */
     private fun createPlaceholderItem(position: Int, domain: String, description: String) =
-        PlaceholderItem(position.toString(), domain, description)
+        RecyclerViewItem(position.toString(), domain, description)
 
     /**
      * A placeholder item representing a piece of content
      */
-    data class PlaceholderItem(val id: String, val domain: String, val description: String)
+    data class RecyclerViewItem(val id: String, val domain: String, val description: String)
 }

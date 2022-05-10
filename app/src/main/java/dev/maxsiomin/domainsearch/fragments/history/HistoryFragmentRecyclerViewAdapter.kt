@@ -11,7 +11,7 @@ import dev.maxsiomin.domainsearch.util.UiActions
  */
 class HistoryItemRecyclerViewAdapter(
     uiActions: UiActions,
-    private val values: List<HistoryLoader.PlaceholderItem>,
+    private val values: List<HistoryLoader.RecyclerViewItem>,
 ) : RecyclerView.Adapter<HistoryItemRecyclerViewAdapter.ViewHolder>(), UiActions by uiActions {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

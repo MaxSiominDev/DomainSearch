@@ -30,19 +30,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/msd_account">
-
-        <Preference
-            android:title="@string/send_email_verification"
-            app:isPreferenceVisible="false"
-            android:key="@string/key_verify_email" />
-
-        <Preference
-            android:title="@string/log_out"
-            android:key="@string/key_log_out" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/more" >
 
         <Preference

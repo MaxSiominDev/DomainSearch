@@ -1,11 +1,6 @@
 package dev.maxsiomin.domainsearch.network
 
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import retrofit2.http.GET
-
-@Suppress("SpellCheckingInspection")
+/*@Suppress("SpellCheckingInspection")
 private const val BASE_URL = "https://maxsiomin.dev/api/apps/domain_search/"
 
 private val retrofit: Retrofit = Retrofit.Builder()
@@ -27,4 +22,4 @@ object UpdateApi {
     val retrofitService: UpdateApiService by lazy {
         retrofit.create(UpdateApiService::class.java)
     }
-}
+}*/

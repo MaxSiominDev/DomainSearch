@@ -1,6 +1,6 @@
 package dev.maxsiomin.domainsearch.util
 
-object SharedPrefsConfig {
+/*object SharedPrefsConfig {
 
-    const val DATE_UPDATE_SUGGESTED = "dateUpdateSuggested"
-}
+    const val TIME_UPDATE_SUGGESTED = "timeUpdateSuggested"
+}*/

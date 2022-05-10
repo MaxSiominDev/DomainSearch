@@ -3,7 +3,7 @@ package dev.maxsiomin.domainsearch.util
 import android.text.Editable
 import android.util.Patterns
 
-data class Email(
+/*data class Email(
     val value: String,
 ) {
     constructor(editableValue: Editable?) : this(editableValue?.toString() ?: "")
@@ -22,4 +22,4 @@ data class Password(
     companion object {
         const val PASSWORD_MIN_LENGTH = 8
     }
-}
+}*/

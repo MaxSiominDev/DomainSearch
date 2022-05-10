@@ -35,7 +35,7 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         }
     }
 
-    private fun onHistoryUpdated(history: List<HistoryLoader.PlaceholderItem>?) {
+    private fun onHistoryUpdated(history: List<HistoryLoader.RecyclerViewItem>?) {
         // If there is no history in database
         if (history.isNullOrEmpty()) {
             binding.historyIsEmptyTextView.visibility = View.VISIBLE

@@ -6,34 +6,27 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maxsiomin.domainsearch.APK_LOCATION
 import dev.maxsiomin.domainsearch.App
 import dev.maxsiomin.domainsearch.R
 import dev.maxsiomin.domainsearch.base.BaseViewModel
 import dev.maxsiomin.domainsearch.extensions.addOnPreferenceChangeListener
-import dev.maxsiomin.domainsearch.extensions.isNotEmailVerified
 import dev.maxsiomin.domainsearch.extensions.openInBrowser
 import dev.maxsiomin.domainsearch.extensions.setOnClickListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-private const val DEVELOPER_EMAIL = "max@maxsiomin.dev"
+private const val DEVELOPER_EMAIL = "contact@maxsiomin.dev"
 private const val DEVELOPER_WEBSITE = "https://maxsiomin.dev/"
 
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val mViewModel by viewModels<BaseViewModel>()
-
-    @Inject
-    lateinit var auth: FirebaseAuth
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -64,30 +57,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     }
                 }
             }
-        }
-
-        findPreference(R.string.key_verify_email).apply {
-            // If email already verified email verification shouldn't be sent
-            if (auth.currentUser!!.isNotEmailVerified) {
-                isVisible = true
-                setOnClickListener {
-                    auth.currentUser!!.sendEmailVerification().addOnCompleteListener { task ->
-                        mViewModel.toast(
-                            if (task.isSuccessful) R.string.check_email else R.string.unable_to_send_email_verification,
-                            Toast.LENGTH_LONG
-                        )
-                    }
-                }
-            }
-        }
-
-        findPreference(R.string.key_log_out).setOnClickListener {
-            auth.signOut()
-
-            val navHostFragment = this.parentFragment!!
-            val tabsFragment = navHostFragment.parentFragment!!
-
-            tabsFragment.findNavController().popBackStack()
         }
 
         findPreference(R.string.key_help_and_feedback).setOnClickListener {
@@ -135,5 +104,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun moreApps() = requireActivity().openInBrowser(DEVELOPER_WEBSITE)
+    private fun moreApps() {
+        requireActivity().openInBrowser(DEVELOPER_WEBSITE)
+    }
 }

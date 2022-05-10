@@ -14,7 +14,6 @@ import dev.maxsiomin.domainsearch.database.SearchQuery
 import dev.maxsiomin.domainsearch.di.AppModule
 import dev.maxsiomin.domainsearch.extensions.addPrefix
 import dev.maxsiomin.domainsearch.extensions.isCorrectAsDomain
-import dev.maxsiomin.domainsearch.extensions.removeAll
 import dev.maxsiomin.domainsearch.extensions.surroundWith
 import dev.maxsiomin.domainsearch.repository.domainrepository.*
 import dev.maxsiomin.domainsearch.util.*
@@ -30,7 +29,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(uiActions: UiActions) : BaseViewModel(uiActions) {
 
-    // If livedata true set VISIBLE else INVISIBLE
     val textAboveDomainLiveData = stringMutableLiveData()
 
     // Text of @+id/domain_text
@@ -39,12 +37,13 @@ class SearchViewModel @Inject constructor(uiActions: UiActions) : BaseViewModel(
     // Specific description of domain
     val descriptionTextLiveData = stringMutableLiveData()
 
-    // If livedata is true set VISIBLE else GONE
     val progressBarVisibilityLiveData = MutableLiveData<@Visibility Int>()
 
     private var manualSearch: Boolean? = null
 
-    init { clearScreen() }
+    init {
+        clearScreen()
+    }
 
     /**
      * Gets domain from database or downloads it
@@ -58,7 +57,7 @@ class SearchViewModel @Inject constructor(uiActions: UiActions) : BaseViewModel(
         if (manualSearch)
             hideKeyboard(windowToken!!)
 
-        val domain: String = text.removeAll(' ').removePrefix(".").lowercase()
+        val domain: String = text.replace(" ", "").removePrefix(".").lowercase()
 
         if (domain.isCorrectAsDomain()) {
             progressBarVisibilityLiveData.value = View.VISIBLE

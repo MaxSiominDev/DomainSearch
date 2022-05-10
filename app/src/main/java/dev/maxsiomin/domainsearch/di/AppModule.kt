@@ -3,7 +3,6 @@ package dev.maxsiomin.domainsearch.di
 import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
@@ -31,9 +30,9 @@ object AppModule {
     fun provideHistoryLoader(@ApplicationContext context: Context): HistoryLoader =
         HistoryLoader(provideUiActions(context))
 
-    @Singleton
+    /*@Singleton
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()*/
 
 
     @Singleton
